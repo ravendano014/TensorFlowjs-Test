@@ -1,0 +1,38 @@
+<html>
+   <head>
+      <!--- Load ML5 - TensorFlow.js  -->
+      <script src="https://unpkg.com/ml5@0.1.3/dist/ml5.min.js"></script>
+   </head>
+   <body>
+      <h1>Image Clasiffier</h1>
+      <img src="image.jpg" crossorigin="anonymous" id="image"> 
+      <p>
+        Result
+        <strong>
+            <span id="result">....</span>
+        </strong>
+        Accuracy
+        <strong>
+            <span id="probability">....</span>
+        </strong>
+
+      </p>
+      <script>
+        
+        const image = document.getElementById("image");
+        const result = document.getElementById("result");
+        const probability = document.getElementById("probability");
+        
+        const ml5clasiffier = ml5.imageClassifier("MobileNet",function(){
+            console.log("model loaded...");
+        });
+        
+        ml5clasiffier.predict(image,function(err,res){
+            result.innerText = res[0].className;
+            probability.innerText = res[0].probability;
+        });
+      
+      </script>
+      
+    </body>
+</html>
